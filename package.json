@@ -1,0 +1,16 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "express": "3.3.4",
+    "jade": "*",
+    "lodash": "^4.13.1",
+    "pg-promise": "^4.7.5",
+    "x-ray": "^2.3.0"
+  }
+}
