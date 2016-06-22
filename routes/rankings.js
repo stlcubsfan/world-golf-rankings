@@ -16,6 +16,9 @@ const xray = XRay({
     trim: function (value) {
       return typeof value === 'string' ? value.trim() : value;
     },
+    removeSpace: function (value) {
+      return typeof value === 'string' ? JSON.stringify(value).replace(/[^A-Za-z.'-]/g, ' ') : value;
+    },
     toNum: function (value) {
       return Number(value);
     }
@@ -35,7 +38,7 @@ function getRankings(req, res, next) {
         .json(data);
     })
     .catch(function (error) {
-      return next(err);
+      return next(error);
     });
 }
 
@@ -48,7 +51,7 @@ function loadRankings(req, res, next) {
     .then(function() {
       xray('http://www.pgatour.com/stats/stat.186.html', '#statsTable tbody tr', [{
         rank: 'td | trim | toNum',
-        name: '.player-name a | trim'
+        name: '.player-name a | removeSpace | trim'
       }])(function(err, rows) {
         _.each(rows, function (row) {
           if (row.rank < 300) {
