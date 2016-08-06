@@ -7,7 +7,8 @@ var express = require('express')
   , routes = require('./routes')
   , db = require('./routes/rankings')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , cors = require('cors');
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 // development only
 if ('development' == app.get('env')) {
