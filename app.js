@@ -11,6 +11,8 @@ var express = require('express')
   , cors = require('cors');
 
 var app = express();
+app.use(cors());
+app.options('*', cors());
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -22,8 +24,7 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
-app.options('*', cors());
+
 
 // development only
 if ('development' == app.get('env')) {
